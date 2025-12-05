@@ -1,0 +1,41 @@
+{ pkgs, ... }:
+
+{
+  # GNOME Extensions Installer Script
+  #
+  # Find extensions at: https://extensions.gnome.org
+  #
+  # To add more extensions:
+  # 1. Visit the extension page (e.g., https://extensions.gnome.org/extension/3843/tiling-shell/)
+  # 2. Find the download link for the .zip file
+  # 3. Add a new section below with: gnome-extensions install <download-url>
+  #
+  # After editing, run: home-manager switch --flake .#your-username
+  # Then run: install-gnome-extensions
+
+  home.packages = [
+    (pkgs.writeShellScriptBin "install-gnome-extensions" ''
+      #!/usr/bin/env bash
+
+      echo "Installing GNOME Extensions..."
+      echo ""
+
+      # Tiling Shell
+      echo "Installing Tiling Shell..."
+      gnome-extensions install https://extensions.gnome.org/extension-data/tilingshellferrarodomenico.com.v61.shell-extension.zip
+
+      # Blur my Shell
+      echo "Installing Blur my Shell..."
+      gnome-extensions install https://extensions.gnome.org/extension-data/blur-my-shellaunetx.v70.shell-extension.zip
+
+      # Caffeine
+      echo "Installing Caffeine..."
+      gnome-extensions install https://extensions.gnome.org/extension-data/caffeinepatapon.info.v58.shell-extension.zip
+
+      echo ""
+      echo "Done! Restart GNOME Shell to load extensions."
+      echo "On Wayland: Log out and log back in"
+      echo "On X11: Press Alt+F2, type 'r', and press Enter"
+    '')
+  ];
+}
