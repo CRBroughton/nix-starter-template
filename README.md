@@ -76,7 +76,18 @@ This automatically configures everything for your username:
 
 Follow the prompts. It will detect your username and home directory.
 
-### 5. Apply your configuration
+### 5. Commit your files to git
+
+**Important:** Nix can only see files that are tracked by git. Before applying your configuration, you need to commit all your files:
+
+```bash
+git add .
+git commit -m "Initial Nix configuration"
+```
+
+You'll need to do this every time you create new files. For changes to existing files, you can skip this step.
+
+### 6. Apply your configuration
 
 This installs everything and applies your settings:
 
