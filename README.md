@@ -122,7 +122,7 @@ The app ID is at the end of the URL. For example:
 
 Then run:
 ```bash
-home-manager switch --flake .#your-username
+home-manager switch --flake .
 ```
 
 Spotify should now appear in your applications menu! (You may need to log out and back in if it doesn't appear immediately.)
@@ -149,7 +149,7 @@ home.packages = with pkgs; [
 
 Then run:
 ```bash
-home-manager switch --flake .#your-username
+home-manager switch --flake .
 ```
 
 Now open a new terminal and type `htop` to see your system resources in real-time! Press `q` to quit.
@@ -172,7 +172,7 @@ dconf.settings = {
   "org/gnome/shell" = {
     favorite-apps = [
       "org.gnome.Nautilus.desktop"
-      "firefox.desktop"
+      "org.mozilla.firefox.desktop"
     ];
   };
 };
@@ -180,7 +180,7 @@ dconf.settings = {
 
 ### Install GNOME Extensions
 
-After running `home-manager switch`, install extensions:
+After running `home-manager switch --flake .`, install extensions:
 
 ```bash
 install-gnome-extensions
@@ -200,7 +200,7 @@ To add more extensions, edit `modules/gnome-extensions-installer.nix`:
 After editing any `.nix` file:
 
 ```bash
-home-manager switch --flake .#your-username
+home-manager switch --flake .
 ```
 
 ## Common Tasks
@@ -209,7 +209,7 @@ home-manager switch --flake .#your-username
 
 ```bash
 nix flake update
-home-manager switch --flake .#your-username
+home-manager switch --flake .
 ```
 
 ### Back Up Your Configuration
@@ -237,7 +237,7 @@ Store the entire folder somewhere safe. To restore on a new system:
 1. Install Nix first (see installation steps above)
 2. Copy the folder back to your home directory
 3. **If your username is different on the new system**, run `./update-username.sh` to update the configuration
-4. Run `home-manager switch --flake .#your-username`
+4. Run `home-manager switch --flake .`
 
 ### Clean Up Old Versions
 
@@ -253,7 +253,7 @@ If something breaks, revert to a previous version:
 
 ```bash
 home-manager generations        # List all versions
-home-manager switch --flake .#your-username  # Latest version
+home-manager switch --flake .   # Latest version
 ```
 
 ## Understanding the Files
@@ -285,7 +285,7 @@ Add Flathub as a source:
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
-Then run `home-manager switch --flake .#your-username` again.
+Then run `home-manager switch --flake .` again.
 
 ### GNOME extensions won't load
 
@@ -298,7 +298,7 @@ After running `install-gnome-extensions`:
 Make sure you ran:
 
 ```bash
-home-manager switch --flake .#your-username
+home-manager switch --flake .
 ```
 
 ## Going Further
