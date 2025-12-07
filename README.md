@@ -200,12 +200,108 @@ To add more extensions, edit `modules/gnome-extensions-installer.nix`:
 After editing any `.nix` file:
 
 ```bash
+just switch
+```
+
+Or the longer form:
+
+```bash
 home-manager switch --flake .
 ```
+
+## Using Just (Command Runner)
+
+### What is Just?
+
+Just is a simple tool that gives you shortcuts for common commands. Instead of typing long commands like `home-manager switch --flake .`, you can just type `just switch`.
+
+Think of it like having a cheat sheet built into your terminal - you type short, easy-to-remember commands, and Just runs the full command for you.
+
+### Why Use It?
+
+**Without Just:**
+```bash
+# You'd need to remember and type these:
+home-manager switch --flake .
+nix flake update && home-manager switch --flake .
+home-manager expire-generations "-7 days" && nix-collect-garbage --delete-old
+```
+
+**With Just:**
+```bash
+# Much simpler:
+just switch
+just update
+just clean
+```
+
+It's especially helpful when you're learning - you don't need to memorise long commands.
+
+### View All Available Commands
+
+To see everything Just can do for you:
+
+```bash
+just
+```
+
+This shows you all the shortcuts available, like a menu.
+
+### Common Commands
+
+Here are the commands you'll use most often:
+
+```bash
+# Apply your configuration changes
+just switch
+
+# Search for a package
+just search firefox
+
+# Add a package to your config
+just add firefox
+
+# Remove a package
+just remove firefox
+
+# Update all your packages
+just update
+
+# Clean up old versions to free space
+just clean
+
+# Format your Nix files (make them neat)
+just format
+
+# Install GNOME extensions
+just install-extensions
+```
+
+**Tip:** If you ever forget these commands, just type `just` and it will show you the full list!
+
+### Want to Learn More?
+
+The `justfile` is just a text file in your config folder. Open it up and take a look! You'll see how each command works - it's a great way to learn what's happening behind the scenes.
+
+**Challenge:** Try adding your own command! For example, you could add a command that shows how much disk space your Nix store is using:
+
+```bash
+# Add this to your justfile:
+disk-usage:
+    du -sh /nix/store
+```
+
+Then you can run `just disk-usage` anytime! The [Just documentation](https://github.com/casey/just) has more examples to help you get started.
 
 ## Common Tasks
 
 ### Update Everything
+
+```bash
+just update
+```
+
+Or manually:
 
 ```bash
 nix flake update
@@ -244,6 +340,12 @@ Store the entire folder somewhere safe. To restore on a new system:
 Free up disk space by removing old configurations:
 
 ```bash
+just clean
+```
+
+Or manually:
+
+```bash
 nix-collect-garbage --delete-old
 ```
 
@@ -262,6 +364,7 @@ home-manager switch --flake .   # Latest version
 my-nix-config/
 ├── flake.nix           # Defines where Nix gets packages from
 ├── home.nix            # Your main configuration file
+├── justfile            # Command runner with helpful shortcuts
 ├── modules/
 │   ├── packages.nix    # Nix packages to install
 │   ├── flatpak.nix     # Flatpak apps to install

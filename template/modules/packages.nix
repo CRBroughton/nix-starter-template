@@ -12,6 +12,11 @@
   # and back in before they appear in your application menu.
 
   home.packages = with pkgs; [
+    # Package management tools (enabled by default)
+    just                 # Command runner for common tasks
+    nix-search-cli       # Fast package search tool
+    nixfmt-rfc-style     # Nix code formatter
+
     # Example packages - uncomment or add your own:
 
     # Development tools
@@ -34,7 +39,5 @@
     # vlc
     # gimp
     # inkscape
-
-    # Add your packages here
   ];
 }
