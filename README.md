@@ -217,6 +217,8 @@ Just is a simple tool that gives you shortcuts for common commands. Instead of t
 
 Think of it like having a cheat sheet built into your terminal - you type short, easy-to-remember commands, and Just runs the full command for you.
 
+**Best part:** You can run `just` commands from anywhere! You don't need to be in your config folder - the commands will automatically work with your Nix configuration.
+
 ### Why Use It?
 
 **Without Just:**
