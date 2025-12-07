@@ -102,6 +102,7 @@ cp "$TEMPLATE_DIR/modules/gnome-extensions-installer.nix" "$SCRIPT_DIR/modules/g
 print_success "Created modules/gnome-extensions-installer.nix"
 
 cp "$TEMPLATE_DIR/modules/just-wrapper.nix" "$SCRIPT_DIR/modules/just-wrapper.nix"
+sed -i "s|my-nix-config|$(basename "$SCRIPT_DIR")|g" "$SCRIPT_DIR/modules/just-wrapper.nix"
 print_success "Created modules/just-wrapper.nix"
 
 echo ""
