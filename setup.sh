@@ -101,6 +101,9 @@ print_success "Created modules/gnome.nix"
 cp "$TEMPLATE_DIR/modules/gnome-extensions-installer.nix" "$SCRIPT_DIR/modules/gnome-extensions-installer.nix"
 print_success "Created modules/gnome-extensions-installer.nix"
 
+cp "$TEMPLATE_DIR/modules/just-wrapper.nix" "$SCRIPT_DIR/modules/just-wrapper.nix"
+print_success "Created modules/just-wrapper.nix"
+
 echo ""
 print_success "Configuration files created successfully!"
 echo ""
