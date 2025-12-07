@@ -81,6 +81,10 @@ sed -i "s/your-username/$USERNAME/g" "$SCRIPT_DIR/home.nix"
 sed -i "s|/home/your-username|$HOME_DIR|g" "$SCRIPT_DIR/home.nix"
 print_success "Created home.nix"
 
+# Copy justfile
+cp "$TEMPLATE_DIR/justfile" "$SCRIPT_DIR/justfile"
+print_success "Created justfile"
+
 # Create modules directory if it doesn't exist
 mkdir -p "$SCRIPT_DIR/modules"
 
