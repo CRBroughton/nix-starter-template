@@ -101,9 +101,9 @@ print_success "Created modules/gnome.nix"
 cp "$TEMPLATE_DIR/modules/gnome-extensions-installer.nix" "$SCRIPT_DIR/modules/gnome-extensions-installer.nix"
 print_success "Created modules/gnome-extensions-installer.nix"
 
-cp "$TEMPLATE_DIR/modules/just-wrapper.nix" "$SCRIPT_DIR/modules/just-wrapper.nix"
-sed -i "s|my-nix-config|$(basename "$SCRIPT_DIR")|g" "$SCRIPT_DIR/modules/just-wrapper.nix"
-print_success "Created modules/just-wrapper.nix"
+cp "$TEMPLATE_DIR/modules/nix-just.nix" "$SCRIPT_DIR/modules/nix-just.nix"
+sed -i "s|nix-configuration|$(basename "$SCRIPT_DIR")|g" "$SCRIPT_DIR/modules/nix-just.nix"
+print_success "Created modules/nix-just.nix"
 
 echo ""
 print_success "Configuration files created successfully!"
