@@ -34,6 +34,7 @@ add PACKAGE:
     echo ""
     read -p "Install now? (Y/n): " INSTALL
     if [[ -z "$INSTALL" || "$INSTALL" =~ ^[Yy]$ ]]; then
+        just format
         just switch
     else
         echo "Package added. Run 'just switch' to install it later."
@@ -55,7 +56,8 @@ remove PACKAGE:
     sed -i "/^\s*{{PACKAGE}}\s*$/d" "$PACKAGES_FILE"
 
     echo "✓ Removed '{{PACKAGE}}' from $PACKAGES_FILE"
-    echo "Run 'just switch' to uninstall the package"
+    just format
+    just switch
 
 # Clean old generations (keeps last 7 days)
 clean:
