@@ -217,8 +217,6 @@ Just is a simple tool that gives you shortcuts for common commands. Instead of t
 
 Think of it like having a cheat sheet built into your terminal - you type short, easy-to-remember commands, and Just runs the full command for you.
 
-**Best part:** You can run `just` commands from anywhere! You don't need to be in your config folder - the commands will automatically work with your Nix configuration.
-
 ### Why Use It?
 
 **Without Just:**
@@ -238,6 +236,30 @@ just clean
 ```
 
 It's especially helpful when you're learning - you don't need to memorise long commands.
+
+### Two Ways to Use Just
+
+**Option 1: Run from your config folder** (Default)
+
+By default, you need to be in your config folder to run just commands:
+
+```bash
+cd ~/my-nix-config
+just switch
+```
+
+**Option 2: Run from anywhere** (Optional)
+
+Want to run `just` commands from anywhere on your system? Enable global support:
+
+```bash
+enable-just-support
+home-manager switch --flake .
+```
+
+Now you can run `just switch` from any directory and it will automatically use your Nix configuration!
+
+**Note:** If you already have `just` installed system-wide (outside of this config), you must enable global support to avoid conflicts. The wrapper will take priority.
 
 ### View All Available Commands
 
