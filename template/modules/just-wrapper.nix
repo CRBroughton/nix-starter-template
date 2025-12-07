@@ -46,7 +46,7 @@ let
     fi
 
     # Check if already enabled
-    if grep -q "enableGlobalJustWrapper = true" "$WRAPPER_FILE"; then
+    if ${pkgs.gnugrep}/bin/grep -q "enableGlobalJustWrapper = true" "$WRAPPER_FILE"; then
         echo -e "''${GREEN}✓''${NC} Global just support is already enabled!"
         echo ""
         echo "Run 'home-manager switch --flake ${configDir}' to apply if you haven't already."
