@@ -200,7 +200,7 @@ To add more extensions, edit `modules/gnome-extensions-installer.nix`:
 After editing any `.nix` file:
 
 ```bash
-just switch
+nix-just switch
 ```
 
 Or the longer form:
@@ -213,11 +213,12 @@ home-manager switch --flake .
 
 ### What is Just?
 
-Just is a simple tool that gives you shortcuts for common commands. Instead of typing long commands like `home-manager switch --flake .`, you can just type `just switch`.
+[Just](https://just.systems/man/en/) is a simple tool that gives you shortcuts for common commands. Instead of typing long commands like `home-manager switch --flake .`, you can just type `nix-just switch`.
 
 Think of it like having a cheat sheet built into your terminal - you type short, easy-to-remember commands, and Just runs the full command for you.
 
 ### Why Use It?
+
 
 **Without Just:**
 ```bash
@@ -230,43 +231,21 @@ home-manager expire-generations "-7 days" && nix-collect-garbage --delete-old
 **With Just:**
 ```bash
 # Much simpler:
-just switch
-just update
-just clean
+nix-just switch
+nix-just update
+nix-just clean
 ```
 
 It's especially helpful when you're learning - you don't need to memorise long commands.
 
-### Two Ways to Use Just
-
-**Option 1: Run from your config folder** (Default)
-
-By default, you need to be in your config folder to run just commands:
-
-```bash
-cd ~/my-nix-config
-just switch
-```
-
-**Option 2: Run from anywhere** (Optional)
-
-Want to run `just` commands from anywhere on your system? Enable global support:
-
-```bash
-enable-just-support
-home-manager switch --flake .
-```
-
-Now you can run `just switch` from any directory and it will automatically use your Nix configuration!
-
-**Note:** If you already have `just` installed system-wide (outside of this config), you must enable global support to avoid conflicts. The wrapper will take priority.
+Now you can run `nix-just switch` from any directory and it will automatically use your Nix configuration!
 
 ### View All Available Commands
 
 To see everything Just can do for you:
 
 ```bash
-just
+nix-just
 ```
 
 This shows you all the shortcuts available, like a menu.
@@ -277,31 +256,29 @@ Here are the commands you'll use most often:
 
 ```bash
 # Apply your configuration changes
-just switch
+nix-just switch
 
 # Search for a package
-just search firefox
+nix-just search firefox
 
 # Add a package to your config
-just add firefox
+nix-just add firefox
 
 # Remove a package
-just remove firefox
+nix-just remove firefox
 
 # Update all your packages
-just update
+nix-just update
 
 # Clean up old versions to free space
-just clean
+nix-just clean
 
 # Format your Nix files (make them neat)
-just format
+nix-just format
 
 # Install GNOME extensions
-just install-extensions
+nix-just install-extensions
 ```
-
-**Tip:** If you ever forget these commands, just type `just` and it will show you the full list!
 
 ### Want to Learn More?
 
@@ -315,14 +292,14 @@ disk-usage:
     du -sh /nix/store
 ```
 
-Then you can run `just disk-usage` anytime! The [Just documentation](https://github.com/casey/just) has more examples to help you get started.
+Then you can run `nix-just disk-usage` anytime! The [Just documentation](https://github.com/casey/just) has more examples to help you get started.
 
 ## Common Tasks
 
 ### Update Everything
 
 ```bash
-just update
+nix-just update
 ```
 
 Or manually:
@@ -364,7 +341,7 @@ Store the entire folder somewhere safe. To restore on a new system:
 Free up disk space by removing old configurations:
 
 ```bash
-just clean
+nix-just clean
 ```
 
 Or manually:
