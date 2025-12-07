@@ -1,0 +1,79 @@
+# Default recipe - show available commands
+default:
+    @just --list
+
+# Apply configuration changes (switch)
+switch:
+    home-manager switch --flake .
+
+# Update all packages and apply changes
+update:
+    nix flake update
+    home-manager switch --flake .
+
+# Search for a package using nix-search-cli
+search PACKAGE:
+    nix-search {{PACKAGE}}
+
+# Add a package to modules/packages.nix
+add PACKAGE:
+    #!/usr/bin/env bash
+    set -e
+    PACKAGES_FILE="modules/packages.nix"
+
+    # Check if package already exists
+    if grep -q "^\s*{{PACKAGE}}\s*$" "$PACKAGES_FILE"; then
+        echo "Package '{{PACKAGE}}' already exists in $PACKAGES_FILE"
+        exit 1
+    fi
+
+    # Add the package before the closing ];
+    sed -i "/^  \];$/i\    {{PACKAGE}}" "$PACKAGES_FILE"
+
+    echo "✓ Added '{{PACKAGE}}' to $PACKAGES_FILE"
+    echo ""
+    read -p "Install now? (Y/n): " INSTALL
+    if [[ -z "$INSTALL" || "$INSTALL" =~ ^[Yy]$ ]]; then
+        just format
+        just switch
+    else
+        echo "Package added. Run 'just switch' to install it later."
+    fi
+
+# Remove a package from modules/packages.nix
+remove PACKAGE:
+    #!/usr/bin/env bash
+    set -e
+    PACKAGES_FILE="modules/packages.nix"
+
+    # Check if package exists
+    if ! grep -q "^\s*{{PACKAGE}}\s*$" "$PACKAGES_FILE"; then
+        echo "Package '{{PACKAGE}}' not found in $PACKAGES_FILE"
+        exit 1
+    fi
+
+    # Remove the package line
+    sed -i "/^\s*{{PACKAGE}}\s*$/d" "$PACKAGES_FILE"
+
+    echo "✓ Removed '{{PACKAGE}}' from $PACKAGES_FILE"
+    just format
+    just switch
+
+# Clean old generations (keeps last 7 days)
+clean:
+    home-manager expire-generations "-7 days"
+    nix-collect-garbage --delete-old
+
+# Format all Nix files
+format:
+    #!/usr/bin/env bash
+    if ! command -v nixfmt &> /dev/null; then
+        echo "Error: nixfmt not found. Run 'just switch' first to install it."
+        exit 1
+    fi
+    find . -name '*.nix' -type f -exec nixfmt {} +
+    echo "✓ Formatted all Nix files"
+
+# Install GNOME extensions
+install-extensions:
+    install-gnome-extensions

@@ -81,6 +81,10 @@ sed -i "s/your-username/$USERNAME/g" "$SCRIPT_DIR/home.nix"
 sed -i "s|/home/your-username|$HOME_DIR|g" "$SCRIPT_DIR/home.nix"
 print_success "Created home.nix"
 
+# Copy justfile
+cp "$TEMPLATE_DIR/justfile" "$SCRIPT_DIR/justfile"
+print_success "Created justfile"
+
 # Create modules directory if it doesn't exist
 mkdir -p "$SCRIPT_DIR/modules"
 
@@ -97,6 +101,10 @@ print_success "Created modules/gnome.nix"
 cp "$TEMPLATE_DIR/modules/gnome-extensions-installer.nix" "$SCRIPT_DIR/modules/gnome-extensions-installer.nix"
 print_success "Created modules/gnome-extensions-installer.nix"
 
+cp "$TEMPLATE_DIR/modules/nix-just.nix" "$SCRIPT_DIR/modules/nix-just.nix"
+sed -i "s|nix-configuration|$(basename "$SCRIPT_DIR")|g" "$SCRIPT_DIR/modules/nix-just.nix"
+print_success "Created modules/nix-just.nix"
+
 echo ""
 print_success "Configuration files created successfully!"
 echo ""
@@ -108,10 +116,14 @@ echo "     - modules/packages.nix (add Nix packages)"
 echo "     - modules/flatpak.nix (add Flatpak apps)"
 echo "     - modules/gnome.nix (customize GNOME settings)"
 echo ""
-echo "  3. Apply the configuration:"
+echo "  3. Commit your Nix configuration:"
+echo "     - git add ."
+echo "     - git commit -m 'Initial Nix configuration'"
+echo ""
+echo "  4. Apply the configuration:"
 echo -e "     ${GREEN}nix run home-manager/master -- switch --flake .#$USERNAME -b backup${NC}"
 echo ""
-echo "  4. After applying, install GNOME extensions:"
+echo "  5. After applying, install GNOME extensions:"
 echo -e "     ${GREEN}install-gnome-extensions${NC}"
 echo ""
 print_warning "Remember to back up your configuration!"
